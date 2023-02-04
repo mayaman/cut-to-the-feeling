@@ -1,0 +1,37 @@
+body {
+    background-color: red;
+    /* background-image: url('https://cdn.shopify.com/s/files/1/0317/2901/products/maggie_lee_wristbands.jpg?v=1565987282'); */
+    overflow: hidden;
+    margin: 0px;
+    padding: 0px;
+}
+
+#text {
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 68px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+#wrapper {
+    width: 100vw;
+    height: 100vh;
+}
+
+.text {
+    position: absolute;
+    color: white;
+    display: inline-block;
+}
+
+.italic {
+    font-style: italic;
+}
+
+#pics {
+    position: absolute;
+    bottom: 5vw;
+    left: 5vw;
+    max-width: 26vw;
+}
