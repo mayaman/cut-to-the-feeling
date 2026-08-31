@@ -54,7 +54,7 @@ const lyrics = text
   .replace(/[()]/g, "")
   .match(/[A-Za-z]+(?:['’][A-Za-z]+)?/g);
 
-let lyricIndex = Math.floor(Math.random() * lyrics.length);
+let shuffledLyrics = shuffleLyrics(lyrics);
 console.log("\n\n\nhttps://www.youtube.com/watch?v=Qlsu7RhOnsQ\n\n\n\n");
 
 for (let i = 0; i < lyrics.length; i++) {
@@ -75,19 +75,36 @@ function onWindowResize() {
     height = window.innerHeight;
 }
 
+function shuffleLyrics(sourceLyrics) {
+    const shuffled = [...sourceLyrics];
+
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const randomIndex = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[i]];
+    }
+
+    return shuffled;
+}
+
+function getNextLyric() {
+    if (shuffledLyrics.length === 0) {
+        shuffledLyrics = shuffleLyrics(lyrics);
+    }
+
+    return shuffledLyrics.pop();
+}
+
 function renderText() {
     let interval = 50 + (Math.random() * 400);
     // interval = 200;
 
-    let newLyric = lyrics[lyricIndex].toLowerCase();
+    let newLyric = getNextLyric().toLowerCase();
     if (newLyric == 'i') {
         newLyric = 'I';
     }
     div.innerText = newLyric;
-    lyricIndex = (lyricIndex + 1) % lyrics.length;
 
     setTimeout(() => {
         renderText();
     }, interval);
 }
-
