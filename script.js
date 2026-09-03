@@ -6,7 +6,7 @@ var text =
     "I had a dream, or was it real?" +
 	" We crossed the line and it was on" +
 	" We crossed the line, it was on this time" +
-	" I've been denying how I feel, you've been denying what you want" +
+	" I’ve been denying how I feel, you’ve been denying what you want" +
 	" You want from me, talk to me, baby" +
 	" I want some satisfaction, take me to the stars" +
 	" Just like ah-ah-ah, ah-ah-ah" +
@@ -19,9 +19,9 @@ var text =
 	" I wanna cut to the feeling, oh yeah" +
 	" I wanna cut to the feeling, oh yeah" +
 	" Cancel your reservations, no more hesitations this is on" +
-	" Can't make it stop, give me all you got" +
+	" Can’t make it stop, give me all you got" +
 	" I want it all or nothing, no more in between, now give your" +
-	" Everything to me, let's get real, baby" +
+	" Everything to me, let’s get real, baby" +
 	" A chemical reaction, take me in your arms" +
 	" And make me (hey) ah-ah-ah, ah-ah-ah" +
 	" I wanna cut through the clouds, break the ceiling" +
@@ -52,7 +52,7 @@ var text =
  
 const lyrics = text
   .replace(/[()]/g, "")
-  .match(/[A-Za-z]+(?:['’][A-Za-z]+)?/g);
+  .match(/[A-Za-z]+(?:’[A-Za-z]+)?/g);
 
 let shuffledLyrics = shuffleLyrics(lyrics);
 console.log("\n\n\nhttps://www.youtube.com/watch?v=Qlsu7RhOnsQ\n\n\n\n");
@@ -94,14 +94,21 @@ function getNextLyric() {
     return shuffledLyrics.pop();
 }
 
+function formatLyric(lyric) {
+    const formattedLyric = lyric.toLowerCase();
+
+    if (formattedLyric === "i" || /^i’/.test(formattedLyric)) {
+        return "I" + formattedLyric.slice(1);
+    }
+
+    return formattedLyric;
+}
+
 function renderText() {
     let interval = 50 + (Math.random() * 400);
     // interval = 200;
 
-    let newLyric = getNextLyric().toLowerCase();
-    if (newLyric == 'i') {
-        newLyric = 'I';
-    }
+    let newLyric = formatLyric(getNextLyric());
     div.innerText = newLyric;
 
     setTimeout(() => {
